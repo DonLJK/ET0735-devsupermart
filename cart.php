@@ -9,7 +9,7 @@ if($conn->connect_error)
 //FOR NOW CAN PASS CART TYPE TO DB
 if (isset($_POST['purchase'])) {
     $d = $_POST['delivery'];
-    $p = $_POST['product-add'];
+    $p = $_POST['button-product'];
     //ADD MORE POSTS
     $sql2 = "INSERT INTO cart (cart_type, cart_id, cart_date, prod_id, prod_quantity) VALUES ('$d','0', NOW(), '$p', '4')";	
 }

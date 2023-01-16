@@ -59,6 +59,14 @@ if ($result->num_rows > 0) {
             </nav>
             <h1 class="band-name band-name-large">The Generics</h1>
         </header>
+
+        <!--USER ID ADDED USING BUTTON-->
+        <form method="post" action="user.php">
+                    <input name="user" type="submit" value="User ID">
+                    <span class="output"> <?php echo $output;?></span>
+                    
+        </form> 
+
         <!--PRODUCT TABLE INTEGRATED CAN DISPLAY-->
         <section class="container content-section">
             <h2 class="section-header">MUSIC</h2>
@@ -68,12 +76,19 @@ if ($result->num_rows > 0) {
             ?>
             <div class="shop-items">
                 <div class="shop-item">
-                    <span class="shop-item-title"><?php echo $row['prod_name']; ?></span>
-                    <img class="shop-item-image" src="<?php echo $row['prod_image']?>">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$ <?php echo $row['prod_price']; ?></span>
-                        <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                    </div>
+                    
+                    
+                        <span class="shop-item-title"><?php echo $row['prod_name']; ?></span>
+                        <img class="shop-item-image" src="<?php echo $row['prod_image']?>">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$ <?php echo $row['prod_price']; ?></span>
+                            <button class="btn btn-primary shop-item-button" type="button" name="add-product">ADD TO CART</button>
+                            
+                        </div>
+                        
+                    
+                    
+                
                 </div>
                 
             </div>
