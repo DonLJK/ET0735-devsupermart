@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+include 'header.html';
 
 if($conn->connect_error)
 {
@@ -8,6 +9,7 @@ if($conn->connect_error)
 
 $output = "";
 //FOR NOW CAN PASS CART TYPE TO DB
+
 if (isset($_POST['user'])) {
     //ADD MORE POSTS
     $sql3 = "INSERT INTO user (id) VALUES ('0')";	
@@ -24,5 +26,10 @@ else
 }
 
 
+
 $conn->close();
+
+include 'Store.php';
+include 'footer.html';
 ?>
+

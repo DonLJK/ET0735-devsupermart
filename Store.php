@@ -38,32 +38,17 @@ if ($result->num_rows > 0) {
 }*/
 
 //$conn->close();
+$page_title = 'The Generics | Store';
+include 'header.html';
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>The Generics | Store</title>
-        <meta name="description" content="This is the description">
-        <link rel="stylesheet" href="style.css" />
-        <script src="store.js" async></script>
-    </head>
-    <body>
-        <header class="main-header">
-            <nav class="main-nav nav">
-                <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="store.html">STORE</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                </ul>
-            </nav>
-            <h1 class="band-name band-name-large">The Generics</h1>
-        </header>
 
         <!--USER ID ADDED USING BUTTON-->
         <form method="post" action="user.php">
                     <input name="user" type="submit" value="User ID">
-                    <span class="output"> <?php echo $output;?></span>
+                    <span><?php echo $output;?></span>
+                    
+                    
                     
         </form> 
 
@@ -97,7 +82,7 @@ if ($result->num_rows > 0) {
             }
             //$conn->close();
         ?>
-        <section class="container content-section">
+        <!--<section class="container content-section">
             <h2 class="section-header">MERCH</h2>
             <div class="shop-items">
                 <div class="shop-item">
@@ -119,7 +104,7 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
         <!----------------------------------------------------- CART -------------------------------------------------------->
         
         <section class="container content-section">
@@ -214,28 +199,7 @@ if ($result->num_rows > 0) {
         // have another to insert cart total into payment table
         //$i = "INSERT INTO ________" ( , , prod_id, ) values('', NOW(), $_POST['Prod id?'], )?>
         
-        <footer class="main-footer">
-            <div class="container main-footer-container">
-                <h3 class="band-name">The Generics</h3>
-                <ul class="nav footer-nav">
-                    <li>
-                        <a href="https://www.youtube.com" target="_blank">
-                            <img src="Images/YouTube Logo.png">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.spotify.com" target="_blank">
-                            <img src="Images/Spotify Logo.png">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com" target="_blank">
-                            <img src="Images/Facebook Logo.png">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </footer>
-    </body>
-</html>
 
+<?php
+include 'footer.html';
+?>
