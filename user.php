@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+session_start();
 
 if($conn->connect_error)
 {
@@ -14,7 +15,6 @@ if (isset($_POST['start']))
     $nfind = mysqli_query($conn, $findid);
     if($nfind == true)
     {
-        echo "hmmmm";
         $row = mysqli_fetch_assoc($nfind);
         $_SESSION['id']=$row['id'];
         header("Location: Store.php");
@@ -25,11 +25,6 @@ if (isset($_POST['start']))
         alert("Error: ".$nfind."<br>".$conn->error);
     }
 
-}
-
-if(isset($_SESSION['user']))
-{
-    echo "<script>alert('Test bit')</script>";
 }
 
 //*/
