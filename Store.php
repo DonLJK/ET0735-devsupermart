@@ -1,43 +1,15 @@
 <?php
 include 'config.php';
 session_start();
-error_reporting(0);
 
-//================== SELECT ======================//
+if(!isset($_SESSION['id']))
+{
+    header("Location: index.php");
+}
+
 $s = "SELECT * FROM product";
 $result = $conn->query($s);
-/*
-if ($result->num_rows > 0) {
-
-
-	echo "<table border='1'>";
-	echo "<tr>";
-    echo "<th>ID</th>";
-    echo "<th>Name</th>";
-    echo "<th>Price</th>";
-    echo "<th>Quantity</th>";
-    echo "</tr>";
-
-//============ DISPLAY DATA =================//
-	while ($row = $result->fetch_assoc()) {
-		echo "<tr>";
-        echo "<td>". $row['prod_id']. "</td>";
-        echo "<td>". $row['prod_name']. "</td>";
-        echo "<td>". $row['prod_price']. "</td>";
-        echo "<td>". $row['prod_quantity']. "</td>";
-        echo "</tr>";
-	}
-
-	echo '</table>'; 
-	
-
-} else {
-
-	echo '0 result';
-
-}*/
-
-//$conn->close();
+        
 ?>
 
 <!DOCTYPE html>
@@ -55,17 +27,11 @@ if ($result->num_rows > 0) {
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="store.html">STORE</a></li>
                     <li><a href="about.html">ABOUT</a></li>
+                    <li class="nav-item" style="float: right; margin-left: 30px; margin-right: 30px;"><a class="nav-link" href="logout.php">Logout</a></li>
                 </ul>
             </nav>
             <h1 class="band-name band-name-large">The Generics</h1>
         </header>
-
-        <!--USER ID ADDED USING BUTTON-->
-        <form method="post" action="user.php">
-                    <input name="user" type="submit" value="User ID">
-                    <span class="output"> <?php echo $output;?></span>
-                    
-        </form> 
 
         <!--PRODUCT TABLE INTEGRATED CAN DISPLAY-->
         <section class="container content-section">
@@ -77,14 +43,17 @@ if ($result->num_rows > 0) {
             <div class="shop-items">
                 <div class="shop-item">
                     
-                    
+                    <form method="POST" action="cart.php">
                         <span class="shop-item-title"><?php echo $row['prod_name']; ?></span>
                         <img class="shop-item-image" src="<?php echo $row['prod_image']?>">
                         <div class="shop-item-details">
                             <span class="shop-item-price">$ <?php echo $row['prod_price']; ?></span>
                             <button class="btn btn-primary shop-item-button" type="button" name="add-product">ADD TO CART</button>
-                            
                         </div>
+                    </form >
+                        <!----Test---->
+                        
+                        <!----Test---->
                         
                     
                     
@@ -97,6 +66,8 @@ if ($result->num_rows > 0) {
             }
             //$conn->close();
         ?>
+
+        <!--
         <section class="container content-section">
             <h2 class="section-header">MERCH</h2>
             <div class="shop-items">
@@ -119,7 +90,8 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
+
         <!----------------------------------------------------- CART -------------------------------------------------------->
         
         <section class="container content-section">
@@ -178,41 +150,44 @@ if ($result->num_rows > 0) {
          <!-- Working Table display -->
         <?php
         /*
-        $sql = "SELECT prod_id from product where prod_name = 'Apple'";
-        $r = $conn->query($sql);
-        if ($r->num_rows > 0) {
+        if ($result->num_rows > 0) {
 
-            
+
             echo "<table border='1'>";
             echo "<tr>";
             echo "<th>ID</th>";
             echo "<th>Name</th>";
             echo "<th>Price</th>";
+            echo "<th>Quantity</th>";
             echo "</tr>";
-            
-            while($row = $r->fetch_assoc())
-            {
-            echo "<tr>";
-            echo "<td>".$row['prod_id']. "</td>";
-            echo "<td>".$row['prod_name']."</td>";
-            echo "<td>".$row['prod_price']."</td>";
-            echo "</tr>";
-            }
-            echo "</table>";   
-        }
-        else 
-        {
-            echo "0 results";
-        }
-        //$conn -> close();
 
-        
-        */
-        
+        //============ DISPLAY DATA =================//
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>". $row['prod_id']. "</td>";
+                echo "<td>". $row['prod_name']. "</td>";
+                echo "<td>". $row['prod_price']. "</td>";
+                echo "<td>". $row['prod_quantity']. "</td>";
+                echo "</tr>";
+            }
+
+            echo '</table>'; 
+            
+
+        } else {
+
+            echo '0 result';
+
+        }*/
+
+        //$conn->close();
+
         //insert the prod ids in the cart to the cart table
         //inserting into _______ (Values inside bracket is HTML value)
         // have another to insert cart total into payment table
-        //$i = "INSERT INTO ________" ( , , prod_id, ) values('', NOW(), $_POST['Prod id?'], )?>
+        //$i = "INSERT INTO ________" ( , , prod_id, ) values('', NOW(), $_POST['Prod id?'], )
+        
+        ?>
         
         <footer class="main-footer">
             <div class="container main-footer-container">

@@ -6,23 +6,31 @@ if($conn->connect_error)
     die("Connection failed: ".$conn->connect_error);
 }
 
-$output = "";
-//FOR NOW CAN PASS CART TYPE TO DB
-if (isset($_POST['user'])) {
-    //ADD MORE POSTS
-    $sql3 = "INSERT INTO user (id) VALUES ('0')";	
-}
-
-$r = @mysqli_query($conn, $sql3);
-if($r)
+if (isset($_POST['start']))
 {
-    $output = "UOOOOOOOOOOOOOOOOOOOOOOOOOH YOU DID IT YOU MAD LAD";
+    //echo "TEST";
+    
+    $findid = "SELECT * FROM user where id='1'";
+    $nfind = mysqli_query($conn, $findid);
+    if($nfind == true)
+    {
+        echo "hmmmm";
+        $row = mysqli_fetch_assoc($nfind);
+        $_SESSION['id']=$row['id'];
+        header("Location: Store.php");
+    }
+    else
+    {
+        echo "everything went wrong";
+        alert("Error: ".$nfind."<br>".$conn->error);
+    }
+
 }
-else
+
+if(isset($_SESSION['user']))
 {
-    echo "Error: ".$sql3."<br>".$conn->error;
+    echo "<script>alert('Test bit')</script>";
 }
 
-
-$conn->close();
+//*/
 ?>
