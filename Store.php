@@ -110,6 +110,7 @@ $result = $conn->query($s);
                     <input type="radio" id="delivery2" name="delivery"  value="Deliver">Deliver (+ $4 to total)<br>
                     <input name="purchase" type="submit" value="Purchase">
                     
+                    
                 </form> 
             <?php
 
@@ -120,8 +121,9 @@ $result = $conn->query($s);
             </div>
             <div class="cart-total">
                 <strong class="cart-total-title">Total</strong>
-                <span class="cart-total-price">$0</span>
+                <span class="cart-total-price" name="price" >$0</span>
             </div>
+            <p><a href="payment.php">Visit W3Schools.com!</a></p>
             <!--New Div -->
              
             <!--End of Div-->

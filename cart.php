@@ -10,7 +10,9 @@ if($conn->connect_error)
 //HAD TO CHANGE THE PRODCT TABLE COLUMN ID TO PROD_ID
 if (isset($_POST['purchase'])) {
     //ADD MORE POSTS
-    $sql3 = "SELECT user.id, product.prod_id, FROM user, product where user.id='1' AND product.prod_id='2'";	
+    $sql3 = "SELECT user.id, product.prod_id FROM user, product where user.id='1' AND product.prod_id='2'";	
+    //TRYING TO TRANSFER QUANTITY VALUES
+    //$quant = $_POST['quantity'];
 
 
 $r = @mysqli_query($conn, $sql3);
@@ -21,7 +23,8 @@ if($r == true)
     echo $row['prod_id'];
     $uid = $row['id'];
     $prod = $row['prod_id'];
-    $sql2 = "INSERT INTO cart (id, customer_id, prod_id, prod_quantity) VALUES ('0','$uid', '$prod', '4')";
+    $quant = $_POST['quantity-check'];
+    $sql2 = "INSERT INTO cart (id, customer_id, prod_id, prod_quantity) VALUES ('0','$uid', '$prod', '$quant')";
     $q = @mysqli_query($conn, $sql2);
     if($q == true)
     {
