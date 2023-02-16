@@ -9,3 +9,4 @@ def init():
 
 def set_output(led, level):
     GPIO.output(24, level)
+
