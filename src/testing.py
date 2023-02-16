@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-#from picamera import PiCamera
+from picamera import PiCamera
 from hal import hal_led as LED
 from hal import hal_keypad as KEYPAD
 from hal import hal_lcd as LCD
@@ -7,12 +7,14 @@ from hal import hal_rfid_reader as RFID
 from time import sleep as sleep
 from threading import Thread
 
+
 #camera
 #cam = PiCamera()
 #sleep(2)
 #camera.capture
 #========
 
+global keypressed
 pin = []
 correctPin = {1, 2, 3, 4}
 
@@ -21,12 +23,27 @@ Prod2 = 584185249835
 Prod1Price = 2.00
 Prod2Price = 3.15
 
-def key_pressed(key):
-    lcd = LCD.lcd()
-    pin.append(key)
-    print(pin)
-    lcd.lcd_display_string(print(pin), 1)
+def readKeypad(key):
+    global keypressed
+    keypressed = key
+    print("Here 1")
+    print(key)
+    print("Here 2")
 
+def Thread_Monitor_Keypad():
+    KEYPAD.get_key()
+
+#def keypadTest():
+#    global pin
+#    lcd = LCD.lcd()
+#    lcd.lcd_display_string("Keypad test", 1)
+#    KEYPAD.init(key_pressed)
+#    print("Here 5")
+#    KEYPAD.get_key()
+#    #print("Here 3")
+#    #print(pin)
+    #print("Here 4")
+#    lcd.lcd_display_string(str(pin), 2)
 
 def init():
     GPIO.setmode(GPIO.BCM)  # choose BCM mode
@@ -67,26 +84,17 @@ def scanItemRFID():
     while True:
         if rfid.read_id() == Prod1:
             lcd.lcd_display_string("Prod1 scanned",1)
-            count + 1
+            count+=1
             lcd.lcd_display_string("$" + str(Prod1Price) + ", Qty: " + str(count),2)
+            sleep(1)
         elif rfid.read_id() == Prod2:
-            lcd.lcd_display_string("Prod1 scanned", 1)
-            count + 1
+            lcd.lcd_display_string("Prod2 scanned", 1)
+            count+=1
             lcd.lcd_display_string("$" + str(Prod2Price) + ", Qty: " + str(count),2)
+            sleep(1)
 
 
-def NETSpayment():
-    lcd = LCD.lcd()
-    lcd.lcd_clear()
 
-    kp = KEYPAD.init(key_pressed)
-    lcd.lcd_display_string(kp)
-    keypad_thread = Thread(target=KEYPAD.get_key)
-    keypad_thread.start()
-
-    lcd.lcd_display_string("NETS Pin:", 1)
-    #lcd.lcd
-    # lcd.lcd_display_string(kp, 2)
 
 
 def paywave_payment():
@@ -109,13 +117,22 @@ def paywave_payment():
 
 
 def main():
-    #init()
-    #paywave_payment()
-    # NETSpayment()
+    global keypressed
+    keypressed = 'X'
+    lcd = LCD.lcd()
+    lcd.lcd_clear()
 
-    scanItemRFID()
+    t1=Thread(target = Thread_Monitor_Keypad()
+    print(keypressed)
+    lcd.lcd_display_string(str(keypressed),2)
+
+    #Working functions:
+    #init()
+    #scanItemRFID()
+    #paywave_payment()
 
 
 
 if __name__ == "__main__":
     main()
+

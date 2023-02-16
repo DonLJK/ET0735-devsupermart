@@ -20,7 +20,7 @@ def init(key_press_cbk):
 
     #set column pins as outputs, and write default value of 1 to each
     for i in range(3):
-        GPIO.setup(COL[i],GPIO.OUT)
+        #GPIO.setup(COL[i],GPIO.OUT)
         GPIO.output(COL[i],1)
 
     #set row pins as inputs, with pull up

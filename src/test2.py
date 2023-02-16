@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
-#from picamera import PiCamera
+#import cv2 #need to do pip install opencv-python then install cv2
+from picamera import PiCamera
 from hal import hal_led as LED
 from hal import hal_keypad as KEYPAD
 from hal import hal_lcd as LCD
@@ -10,8 +11,12 @@ from threading import Thread
 #camera
 #cam = PiCamera()
 #sleep(2)
-#camera.capture
+#cam.capture("home/pi/pictures/img.jpg")
+#print("Done.")
 #========
+
+def read_cam():
+    pass
 
 pin = []
 correctPin = {1, 2, 3, 4}
@@ -67,7 +72,7 @@ def scanItemRFID():
     while True:
         if rfid.read_id() == Prod1:
             lcd.lcd_display_string("Prod1 scanned",1)
-            count + 1
+            count+1
             lcd.lcd_display_string("$" + str(Prod1Price) + ", Qty: " + str(count),2)
         elif rfid.read_id() == Prod2:
             lcd.lcd_display_string("Prod1 scanned", 1)

@@ -9,28 +9,7 @@ if(isset($_SESSION['id']))
 {
     header("Location: Store.php");
 }
-/*
-if (isset($_POST['start']))
-{
-    //echo "TEST";
-    
-    $findid = "SELECT * FROM user where id='1'";
-    $nfind = mysqli_query($conn, $findid);
-    if($nfind == true)
-    {
-        $row = mysqli_fetch_assoc($nfind);
-        $_SESSION['id']=$row['id'];
-        header("Location: Store.php");
-    }
-    else
-    {
-        echo "everything went wrong";
-        alert("Error: ".$nfind."<br>".$conn->error);
-    }
 
-}
-
-//*/
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +17,14 @@ if (isset($_POST['start']))
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <h1>Hello to shop with a pepper</h1>
+        <h1 style="text-align:center;">Welcome to Shop with a Pepper</h1>
         <title>Devops Project</title>
     </head>
     <body>
-        <div>
+        <div style="text-align:center;">
             <!--USER ID ADDED USING BUTTON-->
         <form method="POST" action="user.php">
-            <input name="start" type="submit" value="Start">
+            <input style="background-color: Green; border: none; color: white; padding: 12px 70px; text-align: center; text-decoration: none; display: inline-block;  margin: 2px 6px;  cursor: pointer; font-size:20px; " name="start" type="submit" value="Click to Begin">
             <!--<button name="start" class="btn btn-primary shop-item-button">START</button>-->
         </form>
 
