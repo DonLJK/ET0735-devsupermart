@@ -133,7 +133,7 @@ $result = $conn->query($s);
                 <strong class="cart-total-title">Total</strong>
                 <span class="cart-total-price" name="price" >$0</span>
             </div>
-            <p><a href="payment.php">Visit W3Schools.com!</a></p>
+            <!--<p><a href="payment.php">Visit W3Schools.com!</a></p> -->
             <!--New Div -->
              
             <!--End of Div-->
