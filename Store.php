@@ -104,12 +104,13 @@ $result = $conn->query($s);
             <div class="cart-items">
             </div>
             <div>
-                <form method="post" action="cart.php" style="text-align:center;">
-                  
+                <form method="post" action="cart.php">
+                <div>
                     <input type="radio" id="delivery1" name="delivery" value="Pick-up">Pick-up <br>
                     <input type="radio" id="delivery2" name="delivery"  value="Deliver">Deliver (+ $4 to total)<br>
-                    <input style="text-align: center; background-color: 
-                    Green; 
+                </div>
+                <div style="text-align:center;">
+                    <input style="text-align:center; background-color:turquoise; 
                     border: none;
                     color: white;
                     padding: 12px 70px;
@@ -119,8 +120,7 @@ $result = $conn->query($s);
                     margin: 2px 6px;  cursor:
                     pointer; font-size:20px; "
                     name="purchase" type="submit" value="Purchase">
-                    
-                    
+                </div>
                 </form> 
             <?php
 
