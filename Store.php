@@ -19,6 +19,7 @@ $result = $conn->query($s);
         <meta name="description" content="This is the description">
         <link rel="stylesheet" href="style.css" />
         <script src="store.js" async></script>
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     </head>
     <body>
         <header class="main-header">
@@ -124,41 +125,26 @@ $result = $conn->query($s);
                 </form> 
             <?php
 
-            //$ndwd = $_POST['delivery'];
-            //echo $ndwd;
-
             $conn->close();?>
             </div>
             <div class="cart-total">
                 <strong class="cart-total-title">Total</strong>
                 <span class="cart-total-price" name="price" >$0</span>
             </div>
-            <!--<p><a href="payment.php">Visit W3Schools.com!</a></p> -->
-            <!--New Div -->
-             
-            <!--End of Div-->
-           
+            <p><a href="QRtest.php">Test File</a></p>
+            
+            <div id="qrcode"></div>
+
+            <script>
+                // Define the shopping list data as a string
+                var shoppingList = "1. Milk\n2. Eggs\n3. Bread\n4. Butter";
+
+                // Generate the QR code image and add it to the container
+                
+                new QRCode(document.getElementById("qrcode"), shoppingList);
+	        </script>
         </section>
-         <!--Testing--->
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       
          <!-- Working Table display -->
         <?php
         /*
