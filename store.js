@@ -83,7 +83,9 @@ function addItemToCart(title, price, imageSrc) {
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>
         </form>`
-
+    
+        var shoppingList = "3.bread";
+        new QRCode(document.getElementById("qrcode"), shoppingList);
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
@@ -132,6 +134,28 @@ function updateCartTotal() {
     total = Math.round(total * 100) / 100
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
+
+var shoppingList = "Bread\nApple";
+
+                // Generate the QR code image and add it to the container
+                
+ new QRCode(document.getElementById("qrcode"), shoppingList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*! QRious v4.0.2 | (C) 2017 Alasdair Mercer | GPL v3 License
 Based on jsqrencode | (C) 2010 tz@execpc.com | GPL v3 License
