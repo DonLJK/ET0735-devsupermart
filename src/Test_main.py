@@ -1,4 +1,4 @@
-import testing
+import main
 
 print("testing of DevOps Pj")
 
@@ -8,7 +8,7 @@ def test_nets():
     c = 5
     input_pin = {4,3,2,1}
     test_pin = {1,2,3,4}
-    testing.nets_payment(input_pin,t,c)
+    main.nets_payment(input_pin,t,c)
     assert(result == test_pin)
 
 def test_paywave():
@@ -17,7 +17,7 @@ def test_paywave():
     test_card = 584185249835
     t = 10
     c = 5
-    testing.paywave_payment(input_card, test_card,t,c)
+    main.paywave_payment(input_card, test_card,t,c)
     assert(result ==test_card)
 
 def test_scan_item():
@@ -25,7 +25,7 @@ def test_scan_item():
     test_item1 = 948765671378
     test_item2 = 137218178821
     expected_passed = 1
-    test = testing.scanItemRFID()
+    test = main.scanItemRFID()
 
     if (test == test_item1 or test == test_item2):
         assert (result==expected_passed)
@@ -33,9 +33,9 @@ def test_scan_item():
 def payment_popup_paywave(monkeypatch):
     input_value = "pay"
     monkeypatch.setattr('builtins.input', lambda _: input_value)
-    assert (testing.payment_popup()=="invalud")
+    assert (main.payment_popup()=="invalud")
 
 def payment_popup_nets(monkeypatch):
     input_value = "pay"
     monkeypatch.setattr('builtins.input', lambda _: input_value)
-    assert (testing.payment_popup()=="invalud")
+    assert (main.payment_popup()=="invalud")

@@ -1,121 +1,153 @@
 import RPi.GPIO as GPIO
-#from picamera import PiCamera
-from hal import hal_led as LED
-from hal import hal_keypad as KEYPAD
 from hal import hal_lcd as LCD
 from hal import hal_rfid_reader as RFID
 from time import sleep as sleep
-from threading import Thread
-
-#camera
-#cam = PiCamera()
-#sleep(2)
-#camera.capture
-#========
 
 pin = []
-correctPin = {1, 2, 3, 4}
+lcd = LCD.lcd()
 
-Prod1 = 980711205417
-Prod2 = 584185249835
+Prod1 = 647204679662
+Prod2 = 584156699171
+paymentCard = 584185249835 #Kopitiam card for payment
 Prod1Price = 2.00
 Prod2Price = 3.15
 
-def key_pressed(key):
-    lcd = LCD.lcd()
-    pin.append(key)
-    print(pin)
-    lcd.lcd_display_string(print(pin), 1)
+def scanItemRFID(): #REQ-01 - REQ-03
+    lcd.lcd_clear()
 
+    total = 0
+    count = 0
+
+    rfid = RFID.init()
+
+    systemPrompt = input("Enter 'start' to begin\nPayment will prompt after 5 item scans")
+    lcd.lcd_display_string("Scan on RFID", 1)
+
+    if systemPrompt == 'start':
+        while True:
+            for i in range(5):
+                if rfid.read_id() == Prod1:
+                    lcd.lcd_display_string("Prod1 scanned ", 1)
+
+                    count += 1
+                    lcd.lcd_display_string("$" + str(Prod1Price) + ", Qty: " + str(count), 2)
+                    total += Prod1Price
+                    print("Total: ", total, "count: ", count)
+                    sleep(1)
+
+                elif rfid.read_id() == Prod2:
+                    lcd.lcd_display_string("Prod2 scanned ", 1)
+                    count += 1
+                    lcd.lcd_display_string("$" + str(Prod2Price) + ", Qty: " + str(count), 2)
+                    total += Prod2Price
+                    print("Total: ", total, "count: ", count)
+                    sleep(1)
+            payPrompt = input("Payment? (y/n)")
+
+            if payPrompt == 'y' or payPrompt == 'Y':
+                payment_popup(total,count)
+
+            elif payPrompt == 'n' or payPrompt == 'N':
+                scanItemRFID()
+
+    else:
+        print("goodbye")
+        main()
+
+def nets_payment(a,t,c):
+    var1 = t
+    var2 = c
+    correctPin = 123456
+    if a == correctPin:
+        lcd.lcd_display_string("Thank you for", 1)
+        lcd.lcd_display_string("your purchase", 2)
+        print("payment success")
+        sleep(2)
+        main()
+    else:
+        lcd.lcd_clear()
+        lcd.lcd_display_string("Payment failed", 1)
+        lcd.lcd_display_string("Try again?", 2)
+        retry = input("Payment failed. \nTry again? (Y/N)")
+        if retry == "Y" or "y":
+            print("nets if y")
+            payment_popup(var1,var2)
+
+
+def paywave_payment(card_found, paymentCard,t,c): #REQ-04
+    var1 = t
+    var2 = c
+    rfid = RFID.init()
+    if card_found == paymentCard:
+        lcd.lcd_clear()
+        lcd.lcd_display_string("Thank you for", 1)
+        lcd.lcd_display_string("your purchase", 2)
+        print("payment success")
+        sleep(2)
+        main()
+
+    else:
+        lcd.lcd_clear()
+        lcd.lcd_display_string("Payment failed", 1)
+        lcd.lcd_display_string("Try again?", 2)
+        print("paywave else")
+        retry = input("Payment failed. \nTry again? (y/m)")
+
+        if retry == "Y" or "y":
+            print("paywave if y")
+            payment_popup(var1,var2)
+
+def payment_popup(t,c):
+    rfid = RFID.init()
+    lcd.lcd_clear()
+    lcd.lcd_display_string("Subtotal: " + str(t) + "               ", 1)
+    lcd.lcd_display_string("No. items: " + str(c) + "               ", 2)
+    prompt = input("1. Paywave\n2. NETS")
+    if prompt =="1":
+        lcd.lcd_clear()
+        print("tap card on RFID")
+        lcd.lcd_display_string("Please tap your ", 1)
+        lcd.lcd_display_string("Card on RFID: ", 2)
+
+        paywave_payment(rfid.read_id(), paymentCard,t,c)
+
+    elif prompt == "2":
+        lcd.lcd_clear()
+        nets_input = int(input("Please enter your pin"))
+        lcd.lcd_display_string("Please enter ", 1)
+        lcd.lcd_display_string("your NETS pin ", 2)
+        nets_payment(nets_input,t,c)
+
+    else:
+        print("invalid input!")
 
 def init():
+
     GPIO.setmode(GPIO.BCM)  # choose BCM mode
     GPIO.setwarnings(False)
     GPIO.setup(24, GPIO.OUT)  # set GPIO 24 as output
     lcd = LCD.lcd()
 
     lcd.lcd_clear()
-    lcd.lcd_display_string("Testing System", 1)
+    lcd.lcd_display_string("SuperMart", 1)
     lcd.lcd_display_string("Version 1", 2)
 
-    LED_on()
-    sleep(1)
-    LED_off()
-    sleep(1)
     print("LED OK")
 
     RFID.init()
     rfid = RFID.init()
-    print("RFID init OK")
-    print("Card detected: ", rfid.read_id())
-
-
-def LED_on():
-    LED.set_output(24, 1)
-
-
-def LED_off():
-    LED.set_output(24, 0)
-
-def scanItemRFID():
-    rfid = RFID.init()
-    lcd = LCD.lcd()
-    count = 0
-
-    lcd.lcd_display_string("Scan on RFID", 1)
-
-    while True:
-        if rfid.read_id() == Prod1:
-            lcd.lcd_display_string("Prod1 scanned",1)
-            count + 1
-            lcd.lcd_display_string("$" + str(Prod1Price) + ", Qty: " + str(count),2)
-        elif rfid.read_id() == Prod2:
-            lcd.lcd_display_string("Prod1 scanned", 1)
-            count + 1
-            lcd.lcd_display_string("$" + str(Prod2Price) + ", Qty: " + str(count),2)
-
-
-def NETSpayment():
-    lcd = LCD.lcd()
-    lcd.lcd_clear()
-
-    kp = KEYPAD.init(key_pressed)
-    lcd.lcd_display_string(kp)
-    keypad_thread = Thread(target=KEYPAD.get_key)
-    keypad_thread.start()
-
-    lcd.lcd_display_string("NETS Pin:", 1)
-    #lcd.lcd
-    # lcd.lcd_display_string(kp, 2)
-
-
-def paywave_payment():
-    lcd = LCD.lcd()
-    rfid = RFID.init()
-    lcd.lcd_display_string("paywave payment: ", 1)
-    sleep(1)
-    lcd.lcd_clear()
-    lcd.lcd_display_string("Please tap your ", 1)
-    lcd.lcd_display_string("Card on RFID: ", 2)
-    if rfid.read_id() == 17042980636:
-        lcd.lcd_clear()
-        lcd.lcd_display_string("Thank you for", 1)
-        lcd.lcd_display_string("your purchase", 2)
-        sleep(200)
-    else:
-        lcd.lcd_clear()
-        lcd.lcd_display_string("Payment failed", 1)
-        lcd.lcd_display_string("Try again?", 2)
+    print("RFID init OK\nScan cards 2x times")
+    for i in range(2):
+        print("Card detected: ", rfid.read_id())
+        sleep(1)
 
 
 def main():
     #init()
-    #paywave_payment()
-    # NETSpayment()
-
     scanItemRFID()
-
+    #payment_popup()
 
 
 if __name__ == "__main__":
     main()
+
