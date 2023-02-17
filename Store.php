@@ -45,7 +45,7 @@ $result = $conn->query($s);
                 <div class="shop-item">
                     
                     <form method="POST" action="cart.php">
-                        <span class="shop-item-title" id="item-name"><?php echo $row['prod_name']; ?></span>
+                        <span class="shop-item-title"><?php echo $row['prod_name']; ?></span>
                         <img class="shop-item-image" src="<?php echo $row['prod_image']?>">
                         <div class="shop-item-details">
                             <span class="shop-item-price">$ <?php echo $row['prod_price']; ?></span>
@@ -67,6 +67,9 @@ $result = $conn->query($s);
             }
             //$conn->close();
         ?>
+
+       
+        <!----------------------------------------------------- CART -------------------------------------------------------->
         
         <section class="container content-section">
             <h2 class="section-header">CART</h2>
@@ -110,7 +113,7 @@ $result = $conn->query($s);
 
             <script>
                 // Define the shopping list data as a string
-                var shoppingList = document.getElementById("item-name");
+                var shoppingList = "Apple\nBread";
 
                 // Generate the QR code image and add it to the container
                 
@@ -118,6 +121,47 @@ $result = $conn->query($s);
 	        </script>
         </section>
        
+         <!-- Working Table display -->
+        <?php
+        /*
+        if ($result->num_rows > 0) {
+
+
+            echo "<table border='1'>";
+            echo "<tr>";
+            echo "<th>ID</th>";
+            echo "<th>Name</th>";
+            echo "<th>Price</th>";
+            echo "<th>Quantity</th>";
+            echo "</tr>";
+
+        //============ DISPLAY DATA =================//
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>". $row['prod_id']. "</td>";
+                echo "<td>". $row['prod_name']. "</td>";
+                echo "<td>". $row['prod_price']. "</td>";
+                echo "<td>". $row['prod_quantity']. "</td>";
+                echo "</tr>";
+            }
+
+            echo '</table>'; 
+            
+
+        } else {
+
+            echo '0 result';
+
+        }*/
+
+        //$conn->close();
+
+        //insert the prod ids in the cart to the cart table
+        //inserting into _______ (Values inside bracket is HTML value)
+        // have another to insert cart total into payment table
+        //$i = "INSERT INTO ________" ( , , prod_id, ) values('', NOW(), $_POST['Prod id?'], )
+        
+        ?>
         
         <footer class="main-footer">
             <div class="container main-footer-container">
