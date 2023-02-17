@@ -20,7 +20,7 @@ if($r == true)
 {
     $row = mysqli_fetch_assoc($r);
     echo $row['id'];
-    $prod = "SELECT id from id where prod_name = bread";
+    $prod = "SELECT id from product where prod_name = Bread";
     //$uid = $row['id'];
     //$prod = $row['product.id'];
     //$quant = $_POST['quantity-check'];*/
