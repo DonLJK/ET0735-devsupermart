@@ -45,6 +45,7 @@ $result = $conn->query($s);
                 <div class="shop-item">
                     
                     <form method="POST" action="cart.php">
+                        <?php echo $row['prod_id']; ?>
                         <span class="shop-item-title"><?php echo $row['prod_name']; ?></span>
                         <img class="shop-item-image" src="<?php echo $row['prod_image']?>">
                         <div class="shop-item-details">

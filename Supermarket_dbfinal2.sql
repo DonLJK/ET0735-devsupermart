@@ -31,11 +31,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `devops_supermarketdb`.`product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `devops_supermarketdb`.`product` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `prod_id` INT(11) NOT NULL AUTO_INCREMENT,
   `prod_name` VARCHAR(50) NOT NULL,
   `prod_price` DECIMAL(10,0) NOT NULL,
   `prod_image` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`prod_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 513
 DEFAULT CHARACTER SET = utf8;
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `devops_supermarketdb`.`cart` (
     ON UPDATE NO ACTION,
   CONSTRAINT `productFK`
     FOREIGN KEY (`prod_id`)
-    REFERENCES `devops_supermarketdb`.`product` (`id`)
+    REFERENCES `devops_supermarketdb`.`product` (`prod_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB

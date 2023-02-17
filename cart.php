@@ -7,7 +7,6 @@ if($conn->connect_error)
     die("Connection failed: ".$conn->connect_error);
 }
 
-//HAD TO CHANGE THE PRODCT TABLE COLUMN ID TO PROD_ID
 if (isset($_POST['purchase'])) {
     //ADD MORE POSTS
     $sql3 = "SELECT user.id, product.prod_id FROM user, product where user.id='1' AND product.prod_name='bread'";
