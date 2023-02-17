@@ -10,28 +10,25 @@ if($conn->connect_error)
 //HAD TO CHANGE THE PRODCT TABLE COLUMN ID TO PROD_ID
 if (isset($_POST['purchase'])) {
     //ADD MORE POSTS
-    $sql3 = "SELECT user.id, product.id FROM user, product where user.id='1' AND product.prod_name='apple'";	
-    
-    
+    $sql3 = "SELECT user.id, product.prod_id FROM user, product where user.id='1' AND product.prod_name='bread'";
+
 
 
 $r = @mysqli_query($conn, $sql3);
 if($r == true)
 {
+    echo "<script> alert('Thank you for your purchase!')</script>";
     $row = mysqli_fetch_assoc($r);
-    echo $row['id'];
-    $prod = "SELECT id from product where prod_name = Bread";
-    //$uid = $row['id'];
-    //$prod = $row['product.id'];
-    //$quant = $_POST['quantity-check'];*/
+    //echo $row['id'];
+    $prod = "SELECT prod_id from product where prod_name ='bread'";
     $uid = $row['id'];
-    
-    $quant = 2;
+    $prod = $row['prod_id'];
+    $quant = 3;
     $sql2 = "INSERT INTO cart (id, customer_id, prod_id, prod_quantity) VALUES ('0','$uid', '$prod', '$quant')";
     $q = @mysqli_query($conn, $sql2);
     if($q == true)
     {
-        echo "YOU DID IT";
+        
     }
     else
     {
@@ -44,6 +41,8 @@ else
 }
 
 }
+
+
 
 $conn->close();
 

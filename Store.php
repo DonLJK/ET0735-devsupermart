@@ -137,7 +137,7 @@ $result = $conn->query($s);
 
             <script>
                 // Define the shopping list data as a string
-                var shoppingList = "1. Milk\n2. Eggs\n3. Bread\n4. Butter";
+                var shoppingList = "3.bread";
 
                 // Generate the QR code image and add it to the container
                 
@@ -189,7 +189,7 @@ $result = $conn->query($s);
         
         <footer class="main-footer">
             <div class="container main-footer-container">
-                <h3 class="band-name">The Generics</h3>
+                <h3 class="band-name">SP-market</h3>
                 <ul class="nav footer-nav">
                     <li>
                         <a href="https://www.youtube.com" target="_blank">
