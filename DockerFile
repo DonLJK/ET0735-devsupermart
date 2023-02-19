@@ -1,7 +1,11 @@
-FROM arm32v7/python:3
-COPY main.py ./
-COPY hal ./hal
+FROM python:3.8-slim-buster
 
-RUN pip3 install --no-cache-dir rpi.gpio
+WORKDIR /flask-app
 
-CMD ["python3","./main.py"]
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt 
+
+COPY ./app ./app 
+
+CMD ["python", "./app/app.py"]
