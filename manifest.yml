@@ -1,0 +1,6 @@
+---
+version: 1
+applications:
+- name: devops-supermarket
+  routes:
+  - route: devops-supermarket-[your-unique-username].apps.smu.hackathon.systems
