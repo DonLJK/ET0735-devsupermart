@@ -84,8 +84,8 @@ function addItemToCart(title, price, imageSrc) {
         </div>
         </form>`
     
-        var shoppingList = "3.bread";
-        new QRCode(document.getElementById("qrcode"), shoppingList);
+        //var shoppingList = "bread";
+        //new QRCode(document.getElementById("qrcode"), shoppingList);
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
@@ -135,11 +135,11 @@ function updateCartTotal() {
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
 
-var shoppingList = "Bread\nApple";
+//var shoppingList = "Bread\nApple";
 
                 // Generate the QR code image and add it to the container
                 
- new QRCode(document.getElementById("qrcode"), shoppingList);
+//new QRCode(document.getElementById("qrcode"), shoppingList);
 
 
 
